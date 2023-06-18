@@ -1,0 +1,1084 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="diabidadbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="appointment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="specialistId" Type="int" Nullable="false" />
+          <Property Name="patientId" Type="int" Nullable="false" />
+          <Property Name="appointmentDate" Type="datetime" Nullable="false" />
+          <Property Name="minutes" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bpmInterval">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bpmStartRange" Type="int" Nullable="false" />
+          <Property Name="bpmEndRange" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clinic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clinicByPatient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clinicId" Type="int" Nullable="false" />
+          <Property Name="patientId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="commentText" Type="varchar(max)" Nullable="false" />
+          <Property Name="startDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" Nullable="false" />
+          <Property Name="specialistId" Type="int" Nullable="false" />
+          <Property Name="patientId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="commentResponse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="responseText" Type="varchar(max)" Nullable="false" />
+          <Property Name="commentId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="heartbeatHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="averageBpm" Type="float" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="heightHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="height" Type="float" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="notificationText" Type="varchar(max)" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="specialistId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="userHighBpmId" Type="int" />
+          <Property Name="commentId" Type="int" />
+          <Property Name="patientAssignedId" Type="int" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="specialistByPatient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="specialistId" Type="int" Nullable="false" />
+          <Property Name="patientId" Type="int" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" Nullable="false" />
+          <Property Name="password" Type="varchar(max)" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="pictureUrl" Type="varchar(max)" />
+          <Property Name="tokenFCM" Type="varchar(max)" />
+          <Property Name="userTypeId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="weightHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+          <Property Name="recordDate" Type="datetime" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_appointment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointment_user1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bpmInterval_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="bpmInterval" Type="Self.bpmInterval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bpmInterval">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clinicByPatient_clinic">
+          <End Role="clinic" Type="Self.clinic" Multiplicity="1" />
+          <End Role="clinicByPatient" Type="Self.clinicByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clinic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clinicByPatient">
+              <PropertyRef Name="clinicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clinicByPatient_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="clinicByPatient" Type="Self.clinicByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clinicByPatient">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentResponse_comment">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="commentResponse" Type="Self.commentResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="commentResponse">
+              <PropertyRef Name="commentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentResponse_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="commentResponse" Type="Self.commentResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="commentResponse">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_heartbeatHistory_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="heartbeatHistory" Type="Self.heartbeatHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="heartbeatHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_heightHistory_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="heightHistory" Type="Self.heightHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="heightHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notification_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="notification" Type="Self.notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notification">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specialistByPatient_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="specialistByPatient" Type="Self.specialistByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="specialistByPatient">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specialistByPatient_user1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="specialistByPatient" Type="Self.specialistByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="specialistByPatient">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_userType">
+          <End Role="userType" Type="Self.userType" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="userTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_weightHistory_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="weightHistory" Type="Self.weightHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="weightHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="diabidadbModelStoreContainer">
+          <EntitySet Name="appointment" EntityType="Self.appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bpmInterval" EntityType="Self.bpmInterval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clinic" EntityType="Self.clinic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clinicByPatient" EntityType="Self.clinicByPatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="commentResponse" EntityType="Self.commentResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="heartbeatHistory" EntityType="Self.heartbeatHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="heightHistory" EntityType="Self.heightHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notification" EntityType="Self.notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="specialistByPatient" EntityType="Self.specialistByPatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userType" EntityType="Self.userType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="weightHistory" EntityType="Self.weightHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_appointment_user" Association="Self.FK_appointment_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointment_user1" Association="Self.FK_appointment_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="appointment" EntitySet="appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bpmInterval_user" Association="Self.FK_bpmInterval_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="bpmInterval" EntitySet="bpmInterval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clinicByPatient_clinic" Association="Self.FK_clinicByPatient_clinic">
+            <End Role="clinic" EntitySet="clinic" />
+            <End Role="clinicByPatient" EntitySet="clinicByPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clinicByPatient_user" Association="Self.FK_clinicByPatient_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="clinicByPatient" EntitySet="clinicByPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user" Association="Self.FK_comment_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user1" Association="Self.FK_comment_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentResponse_comment" Association="Self.FK_commentResponse_comment">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="commentResponse" EntitySet="commentResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentResponse_user" Association="Self.FK_commentResponse_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="commentResponse" EntitySet="commentResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_heartbeatHistory_user" Association="Self.FK_heartbeatHistory_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="heartbeatHistory" EntitySet="heartbeatHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_heightHistory_user" Association="Self.FK_heightHistory_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="heightHistory" EntitySet="heightHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notification_user" Association="Self.FK_notification_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="notification" EntitySet="notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specialistByPatient_user" Association="Self.FK_specialistByPatient_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="specialistByPatient" EntitySet="specialistByPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specialistByPatient_user1" Association="Self.FK_specialistByPatient_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="specialistByPatient" EntitySet="specialistByPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_userType" Association="Self.FK_user_userType">
+            <End Role="userType" EntitySet="userType" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_weightHistory_user" Association="Self.FK_weightHistory_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="weightHistory" EntitySet="weightHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="diabidadbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="diabidadbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="appointments" EntityType="diabidadbModel.appointment" />
+          <EntitySet Name="bpmIntervals" EntityType="diabidadbModel.bpmInterval" />
+          <EntitySet Name="clinics" EntityType="diabidadbModel.clinic" />
+          <EntitySet Name="clinicByPatients" EntityType="diabidadbModel.clinicByPatient" />
+          <EntitySet Name="comments" EntityType="diabidadbModel.comment" />
+          <EntitySet Name="commentResponses" EntityType="diabidadbModel.commentResponse" />
+          <EntitySet Name="heartbeatHistories" EntityType="diabidadbModel.heartbeatHistory" />
+          <EntitySet Name="heightHistories" EntityType="diabidadbModel.heightHistory" />
+          <EntitySet Name="notifications" EntityType="diabidadbModel.notification" />
+          <EntitySet Name="specialistByPatients" EntityType="diabidadbModel.specialistByPatient" />
+          <EntitySet Name="sysdiagrams" EntityType="diabidadbModel.sysdiagram" />
+          <EntitySet Name="users" EntityType="diabidadbModel.user" />
+          <EntitySet Name="userTypes" EntityType="diabidadbModel.userType" />
+          <EntitySet Name="weightHistories" EntityType="diabidadbModel.weightHistory" />
+          <AssociationSet Name="FK_appointment_user" Association="diabidadbModel.FK_appointment_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="appointment" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_appointment_user1" Association="diabidadbModel.FK_appointment_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="appointment" EntitySet="appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bpmInterval_user" Association="diabidadbModel.FK_bpmInterval_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="bpmInterval" EntitySet="bpmIntervals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clinicByPatient_clinic" Association="diabidadbModel.FK_clinicByPatient_clinic">
+            <End Role="clinic" EntitySet="clinics" />
+            <End Role="clinicByPatient" EntitySet="clinicByPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_clinicByPatient_user" Association="diabidadbModel.FK_clinicByPatient_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="clinicByPatient" EntitySet="clinicByPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user" Association="diabidadbModel.FK_comment_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user1" Association="diabidadbModel.FK_comment_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentResponse_comment" Association="diabidadbModel.FK_commentResponse_comment">
+            <End Role="comment" EntitySet="comments" />
+            <End Role="commentResponse" EntitySet="commentResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_commentResponse_user" Association="diabidadbModel.FK_commentResponse_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="commentResponse" EntitySet="commentResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_heartbeatHistory_user" Association="diabidadbModel.FK_heartbeatHistory_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="heartbeatHistory" EntitySet="heartbeatHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_heightHistory_user" Association="diabidadbModel.FK_heightHistory_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="heightHistory" EntitySet="heightHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_notification_user" Association="diabidadbModel.FK_notification_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="notification" EntitySet="notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specialistByPatient_user" Association="diabidadbModel.FK_specialistByPatient_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="specialistByPatient" EntitySet="specialistByPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_specialistByPatient_user1" Association="diabidadbModel.FK_specialistByPatient_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="specialistByPatient" EntitySet="specialistByPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_userType" Association="diabidadbModel.FK_user_userType">
+            <End Role="userType" EntitySet="userTypes" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_weightHistory_user" Association="diabidadbModel.FK_weightHistory_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="weightHistory" EntitySet="weightHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="appointment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="specialistId" Type="Int32" Nullable="false" />
+          <Property Name="patientId" Type="Int32" Nullable="false" />
+          <Property Name="appointmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="minutes" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_appointment_user" FromRole="appointment" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="diabidadbModel.FK_appointment_user1" FromRole="appointment" ToRole="user" />
+        </EntityType>
+        <EntityType Name="bpmInterval">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bpmStartRange" Type="Int32" Nullable="false" />
+          <Property Name="bpmEndRange" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_bpmInterval_user" FromRole="bpmInterval" ToRole="user" />
+        </EntityType>
+        <EntityType Name="clinic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="clinicByPatients" Relationship="diabidadbModel.FK_clinicByPatient_clinic" FromRole="clinic" ToRole="clinicByPatient" />
+        </EntityType>
+        <EntityType Name="clinicByPatient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clinicId" Type="Int32" Nullable="false" />
+          <Property Name="patientId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="clinic" Relationship="diabidadbModel.FK_clinicByPatient_clinic" FromRole="clinicByPatient" ToRole="clinic" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_clinicByPatient_user" FromRole="clinicByPatient" ToRole="user" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="commentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="specialistId" Type="Int32" Nullable="false" />
+          <Property Name="patientId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_comment_user" FromRole="comment" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="diabidadbModel.FK_comment_user1" FromRole="comment" ToRole="user" />
+          <NavigationProperty Name="commentResponses" Relationship="diabidadbModel.FK_commentResponse_comment" FromRole="comment" ToRole="commentResponse" />
+        </EntityType>
+        <EntityType Name="commentResponse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="responseText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="commentId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="comment" Relationship="diabidadbModel.FK_commentResponse_comment" FromRole="commentResponse" ToRole="comment" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_commentResponse_user" FromRole="commentResponse" ToRole="user" />
+        </EntityType>
+        <EntityType Name="heartbeatHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="averageBpm" Type="Double" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_heartbeatHistory_user" FromRole="heartbeatHistory" ToRole="user" />
+        </EntityType>
+        <EntityType Name="heightHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="height" Type="Double" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_heightHistory_user" FromRole="heightHistory" ToRole="user" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="notificationText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="specialistId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userHighBpmId" Type="Int32" />
+          <Property Name="commentId" Type="Int32" />
+          <Property Name="patientAssignedId" Type="Int32" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_notification_user" FromRole="notification" ToRole="user" />
+        </EntityType>
+        <EntityType Name="specialistByPatient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="specialistId" Type="Int32" Nullable="false" />
+          <Property Name="patientId" Type="Int32" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_specialistByPatient_user" FromRole="specialistByPatient" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="diabidadbModel.FK_specialistByPatient_user1" FromRole="specialistByPatient" ToRole="user" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tokenFCM" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userTypeId" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="appointments" Relationship="diabidadbModel.FK_appointment_user" FromRole="user" ToRole="appointment" />
+          <NavigationProperty Name="appointments1" Relationship="diabidadbModel.FK_appointment_user1" FromRole="user" ToRole="appointment" />
+          <NavigationProperty Name="bpmIntervals" Relationship="diabidadbModel.FK_bpmInterval_user" FromRole="user" ToRole="bpmInterval" />
+          <NavigationProperty Name="clinicByPatients" Relationship="diabidadbModel.FK_clinicByPatient_user" FromRole="user" ToRole="clinicByPatient" />
+          <NavigationProperty Name="comments" Relationship="diabidadbModel.FK_comment_user" FromRole="user" ToRole="comment" />
+          <NavigationProperty Name="comments1" Relationship="diabidadbModel.FK_comment_user1" FromRole="user" ToRole="comment" />
+          <NavigationProperty Name="commentResponses" Relationship="diabidadbModel.FK_commentResponse_user" FromRole="user" ToRole="commentResponse" />
+          <NavigationProperty Name="heartbeatHistories" Relationship="diabidadbModel.FK_heartbeatHistory_user" FromRole="user" ToRole="heartbeatHistory" />
+          <NavigationProperty Name="heightHistories" Relationship="diabidadbModel.FK_heightHistory_user" FromRole="user" ToRole="heightHistory" />
+          <NavigationProperty Name="notifications" Relationship="diabidadbModel.FK_notification_user" FromRole="user" ToRole="notification" />
+          <NavigationProperty Name="specialistByPatients" Relationship="diabidadbModel.FK_specialistByPatient_user" FromRole="user" ToRole="specialistByPatient" />
+          <NavigationProperty Name="specialistByPatients1" Relationship="diabidadbModel.FK_specialistByPatient_user1" FromRole="user" ToRole="specialistByPatient" />
+          <NavigationProperty Name="userType" Relationship="diabidadbModel.FK_user_userType" FromRole="user" ToRole="userType" />
+          <NavigationProperty Name="weightHistories" Relationship="diabidadbModel.FK_weightHistory_user" FromRole="user" ToRole="weightHistory" />
+        </EntityType>
+        <EntityType Name="userType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="diabidadbModel.FK_user_userType" FromRole="userType" ToRole="user" />
+        </EntityType>
+        <EntityType Name="weightHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="recordDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="diabidadbModel.FK_weightHistory_user" FromRole="weightHistory" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_appointment_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.appointment" Role="appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_appointment_user1">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.appointment" Role="appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="appointment">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bpmInterval_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.bpmInterval" Role="bpmInterval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bpmInterval">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clinicByPatient_clinic">
+          <End Type="diabidadbModel.clinic" Role="clinic" Multiplicity="1" />
+          <End Type="diabidadbModel.clinicByPatient" Role="clinicByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clinic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clinicByPatient">
+              <PropertyRef Name="clinicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_clinicByPatient_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.clinicByPatient" Role="clinicByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="clinicByPatient">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user1">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentResponse_comment">
+          <End Type="diabidadbModel.comment" Role="comment" Multiplicity="1" />
+          <End Type="diabidadbModel.commentResponse" Role="commentResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="commentResponse">
+              <PropertyRef Name="commentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_commentResponse_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.commentResponse" Role="commentResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="commentResponse">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_heartbeatHistory_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.heartbeatHistory" Role="heartbeatHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="heartbeatHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_heightHistory_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.heightHistory" Role="heightHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="heightHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_notification_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.notification" Role="notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="notification">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specialistByPatient_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.specialistByPatient" Role="specialistByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="specialistByPatient">
+              <PropertyRef Name="specialistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_specialistByPatient_user1">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.specialistByPatient" Role="specialistByPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="specialistByPatient">
+              <PropertyRef Name="patientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_userType">
+          <End Type="diabidadbModel.userType" Role="userType" Multiplicity="1" />
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="userTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_weightHistory_user">
+          <End Type="diabidadbModel.user" Role="user" Multiplicity="1" />
+          <End Type="diabidadbModel.weightHistory" Role="weightHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="weightHistory">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="diabidadbModelStoreContainer" CdmEntityContainer="diabidadbEntities">
+          <EntitySetMapping Name="appointments">
+            <EntityTypeMapping TypeName="diabidadbModel.appointment">
+              <MappingFragment StoreEntitySet="appointment">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="minutes" ColumnName="minutes" />
+                <ScalarProperty Name="appointmentDate" ColumnName="appointmentDate" />
+                <ScalarProperty Name="patientId" ColumnName="patientId" />
+                <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bpmIntervals">
+            <EntityTypeMapping TypeName="diabidadbModel.bpmInterval">
+              <MappingFragment StoreEntitySet="bpmInterval">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="bpmEndRange" ColumnName="bpmEndRange" />
+                <ScalarProperty Name="bpmStartRange" ColumnName="bpmStartRange" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clinics">
+            <EntityTypeMapping TypeName="diabidadbModel.clinic">
+              <MappingFragment StoreEntitySet="clinic">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clinicByPatients">
+            <EntityTypeMapping TypeName="diabidadbModel.clinicByPatient">
+              <MappingFragment StoreEntitySet="clinicByPatient">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="patientId" ColumnName="patientId" />
+                <ScalarProperty Name="clinicId" ColumnName="clinicId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="diabidadbModel.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="patientId" ColumnName="patientId" />
+                <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="commentText" ColumnName="commentText" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="commentResponses">
+            <EntityTypeMapping TypeName="diabidadbModel.commentResponse">
+              <MappingFragment StoreEntitySet="commentResponse">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="responseText" ColumnName="responseText" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="heartbeatHistories">
+            <EntityTypeMapping TypeName="diabidadbModel.heartbeatHistory">
+              <MappingFragment StoreEntitySet="heartbeatHistory">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="averageBpm" ColumnName="averageBpm" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="heightHistories">
+            <EntityTypeMapping TypeName="diabidadbModel.heightHistory">
+              <MappingFragment StoreEntitySet="heightHistory">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notifications">
+            <EntityTypeMapping TypeName="diabidadbModel.notification">
+              <MappingFragment StoreEntitySet="notification">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="patientAssignedId" ColumnName="patientAssignedId" />
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="userHighBpmId" ColumnName="userHighBpmId" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="notificationText" ColumnName="notificationText" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="specialistByPatients">
+            <EntityTypeMapping TypeName="diabidadbModel.specialistByPatient">
+              <MappingFragment StoreEntitySet="specialistByPatient">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="patientId" ColumnName="patientId" />
+                <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="diabidadbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="diabidadbModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="userTypeId" ColumnName="userTypeId" />
+                <ScalarProperty Name="tokenFCM" ColumnName="tokenFCM" />
+                <ScalarProperty Name="pictureUrl" ColumnName="pictureUrl" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userTypes">
+            <EntityTypeMapping TypeName="diabidadbModel.userType">
+              <MappingFragment StoreEntitySet="userType">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="weightHistories">
+            <EntityTypeMapping TypeName="diabidadbModel.weightHistory">
+              <MappingFragment StoreEntitySet="weightHistory">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

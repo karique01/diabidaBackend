@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="diabidadbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="appointment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="specialistId" Type="int" Nullable="false" />
+    <Property Name="patientId" Type="int" Nullable="false" />
+    <Property Name="appointmentDate" Type="datetime" Nullable="false" />
+    <Property Name="minutes" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bpmInterval">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bpmStartRange" Type="int" Nullable="false" />
+    <Property Name="bpmEndRange" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clinic">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar(max)" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clinicByPatient">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clinicId" Type="int" Nullable="false" />
+    <Property Name="patientId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="commentText" Type="varchar(max)" Nullable="false" />
+    <Property Name="startDate" Type="date" Nullable="false" />
+    <Property Name="endDate" Type="date" Nullable="false" />
+    <Property Name="specialistId" Type="int" Nullable="false" />
+    <Property Name="patientId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="commentResponse">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="responseText" Type="varchar(max)" Nullable="false" />
+    <Property Name="commentId" Type="int" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="heartbeatHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="averageBpm" Type="float" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="heightHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="height" Type="float" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="notification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="notificationText" Type="varchar(max)" Nullable="false" />
+    <Property Name="typeId" Type="int" Nullable="false" />
+    <Property Name="specialistId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="userHighBpmId" Type="int" />
+    <Property Name="commentId" Type="int" />
+    <Property Name="patientAssignedId" Type="int" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="specialistByPatient">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="specialistId" Type="int" Nullable="false" />
+    <Property Name="patientId" Type="int" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar(max)" Nullable="false" />
+    <Property Name="email" Type="varchar(max)" Nullable="false" />
+    <Property Name="password" Type="varchar(max)" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="pictureUrl" Type="varchar(max)" />
+    <Property Name="tokenFCM" Type="varchar(max)" />
+    <Property Name="userTypeId" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="weightHistory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="weight" Type="float" Nullable="false" />
+    <Property Name="recordDate" Type="datetime" Nullable="false" />
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_appointment_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="appointment">
+        <PropertyRef Name="specialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_appointment_user1">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="appointment" Type="Self.appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="appointment">
+        <PropertyRef Name="patientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bpmInterval_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="bpmInterval" Type="Self.bpmInterval" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bpmInterval">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinicByPatient_clinic">
+    <End Role="clinic" Type="Self.clinic" Multiplicity="1" />
+    <End Role="clinicByPatient" Type="Self.clinicByPatient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clinic">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="clinicByPatient">
+        <PropertyRef Name="clinicId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_clinicByPatient_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="clinicByPatient" Type="Self.clinicByPatient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="clinicByPatient">
+        <PropertyRef Name="patientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comment_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="comment" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="specialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_comment_user1">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="comment" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="patientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_commentResponse_comment">
+    <End Role="comment" Type="Self.comment" Multiplicity="1" />
+    <End Role="commentResponse" Type="Self.commentResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comment">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="commentResponse">
+        <PropertyRef Name="commentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_commentResponse_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="commentResponse" Type="Self.commentResponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="commentResponse">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_heartbeatHistory_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="heartbeatHistory" Type="Self.heartbeatHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="heartbeatHistory">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_heightHistory_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="heightHistory" Type="Self.heightHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="heightHistory">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_notification_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="notification" Type="Self.notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="notification">
+        <PropertyRef Name="specialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_specialistByPatient_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="specialistByPatient" Type="Self.specialistByPatient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="specialistByPatient">
+        <PropertyRef Name="specialistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_specialistByPatient_user1">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="specialistByPatient" Type="Self.specialistByPatient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="specialistByPatient">
+        <PropertyRef Name="patientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_userType">
+    <End Role="userType" Type="Self.userType" Multiplicity="1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="userTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_weightHistory_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="weightHistory" Type="Self.weightHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="weightHistory">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="diabidadbModelStoreContainer">
+    <EntitySet Name="appointment" EntityType="Self.appointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bpmInterval" EntityType="Self.bpmInterval" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clinic" EntityType="Self.clinic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clinicByPatient" EntityType="Self.clinicByPatient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="commentResponse" EntityType="Self.commentResponse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="heartbeatHistory" EntityType="Self.heartbeatHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="heightHistory" EntityType="Self.heightHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="notification" EntityType="Self.notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="specialistByPatient" EntityType="Self.specialistByPatient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userType" EntityType="Self.userType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="weightHistory" EntityType="Self.weightHistory" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_appointment_user" Association="Self.FK_appointment_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="appointment" EntitySet="appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_appointment_user1" Association="Self.FK_appointment_user1">
+      <End Role="user" EntitySet="user" />
+      <End Role="appointment" EntitySet="appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bpmInterval_user" Association="Self.FK_bpmInterval_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="bpmInterval" EntitySet="bpmInterval" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinicByPatient_clinic" Association="Self.FK_clinicByPatient_clinic">
+      <End Role="clinic" EntitySet="clinic" />
+      <End Role="clinicByPatient" EntitySet="clinicByPatient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_clinicByPatient_user" Association="Self.FK_clinicByPatient_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="clinicByPatient" EntitySet="clinicByPatient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comment_user" Association="Self.FK_comment_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_comment_user1" Association="Self.FK_comment_user1">
+      <End Role="user" EntitySet="user" />
+      <End Role="comment" EntitySet="comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_commentResponse_comment" Association="Self.FK_commentResponse_comment">
+      <End Role="comment" EntitySet="comment" />
+      <End Role="commentResponse" EntitySet="commentResponse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_commentResponse_user" Association="Self.FK_commentResponse_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="commentResponse" EntitySet="commentResponse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_heartbeatHistory_user" Association="Self.FK_heartbeatHistory_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="heartbeatHistory" EntitySet="heartbeatHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_heightHistory_user" Association="Self.FK_heightHistory_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="heightHistory" EntitySet="heightHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_notification_user" Association="Self.FK_notification_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="notification" EntitySet="notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_specialistByPatient_user" Association="Self.FK_specialistByPatient_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="specialistByPatient" EntitySet="specialistByPatient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_specialistByPatient_user1" Association="Self.FK_specialistByPatient_user1">
+      <End Role="user" EntitySet="user" />
+      <End Role="specialistByPatient" EntitySet="specialistByPatient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_userType" Association="Self.FK_user_userType">
+      <End Role="userType" EntitySet="userType" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_weightHistory_user" Association="Self.FK_weightHistory_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="weightHistory" EntitySet="weightHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

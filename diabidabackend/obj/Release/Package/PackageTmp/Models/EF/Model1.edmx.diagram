@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a758d2c004c4b948cfaf8301689d483" Name="Diagram1">
+        <EntityTypeShape EntityType="diabidadbModel.appointment" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="diabidadbModel.bpmInterval" Width="1.5" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="diabidadbModel.clinic" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="diabidadbModel.clinicByPatient" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="diabidadbModel.comment" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="diabidadbModel.commentResponse" Width="1.5" PointX="7.5" PointY="12" />
+        <EntityTypeShape EntityType="diabidadbModel.heartbeatHistory" Width="1.5" PointX="5.25" PointY="27.125" />
+        <EntityTypeShape EntityType="diabidadbModel.heightHistory" Width="1.5" PointX="5.25" PointY="24.25" />
+        <EntityTypeShape EntityType="diabidadbModel.notification" Width="1.5" PointX="5.25" PointY="17.375" />
+        <EntityTypeShape EntityType="diabidadbModel.specialistByPatient" Width="1.5" PointX="5.25" PointY="21.125" />
+        <EntityTypeShape EntityType="diabidadbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="diabidadbModel.user" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="diabidadbModel.userType" Width="1.5" PointX="0.75" PointY="15.625" />
+        <EntityTypeShape EntityType="diabidadbModel.weightHistory" Width="1.5" PointX="5.25" PointY="30.125" />
+        <AssociationConnector Association="diabidadbModel.FK_appointment_user" />
+        <AssociationConnector Association="diabidadbModel.FK_appointment_user1" />
+        <AssociationConnector Association="diabidadbModel.FK_bpmInterval_user" />
+        <AssociationConnector Association="diabidadbModel.FK_clinicByPatient_clinic" />
+        <AssociationConnector Association="diabidadbModel.FK_clinicByPatient_user" />
+        <AssociationConnector Association="diabidadbModel.FK_comment_user" />
+        <AssociationConnector Association="diabidadbModel.FK_comment_user1" />
+        <AssociationConnector Association="diabidadbModel.FK_commentResponse_comment" />
+        <AssociationConnector Association="diabidadbModel.FK_commentResponse_user" />
+        <AssociationConnector Association="diabidadbModel.FK_heartbeatHistory_user" />
+        <AssociationConnector Association="diabidadbModel.FK_heightHistory_user" />
+        <AssociationConnector Association="diabidadbModel.FK_notification_user" />
+        <AssociationConnector Association="diabidadbModel.FK_specialistByPatient_user" />
+        <AssociationConnector Association="diabidadbModel.FK_specialistByPatient_user1" />
+        <AssociationConnector Association="diabidadbModel.FK_user_userType" />
+        <AssociationConnector Association="diabidadbModel.FK_weightHistory_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

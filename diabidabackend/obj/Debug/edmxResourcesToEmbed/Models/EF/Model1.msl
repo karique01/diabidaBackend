@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="diabidadbModelStoreContainer" CdmEntityContainer="diabidadbEntities">
+    <EntitySetMapping Name="appointments">
+      <EntityTypeMapping TypeName="diabidadbModel.appointment">
+        <MappingFragment StoreEntitySet="appointment">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="minutes" ColumnName="minutes" />
+          <ScalarProperty Name="appointmentDate" ColumnName="appointmentDate" />
+          <ScalarProperty Name="patientId" ColumnName="patientId" />
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bpmIntervals">
+      <EntityTypeMapping TypeName="diabidadbModel.bpmInterval">
+        <MappingFragment StoreEntitySet="bpmInterval">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="bpmEndRange" ColumnName="bpmEndRange" />
+          <ScalarProperty Name="bpmStartRange" ColumnName="bpmStartRange" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clinics">
+      <EntityTypeMapping TypeName="diabidadbModel.clinic">
+        <MappingFragment StoreEntitySet="clinic">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clinicByPatients">
+      <EntityTypeMapping TypeName="diabidadbModel.clinicByPatient">
+        <MappingFragment StoreEntitySet="clinicByPatient">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="patientId" ColumnName="patientId" />
+          <ScalarProperty Name="clinicId" ColumnName="clinicId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="diabidadbModel.comment">
+        <MappingFragment StoreEntitySet="comment">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="patientId" ColumnName="patientId" />
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="commentText" ColumnName="commentText" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commentResponses">
+      <EntityTypeMapping TypeName="diabidadbModel.commentResponse">
+        <MappingFragment StoreEntitySet="commentResponse">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="responseText" ColumnName="responseText" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="heartbeatHistories">
+      <EntityTypeMapping TypeName="diabidadbModel.heartbeatHistory">
+        <MappingFragment StoreEntitySet="heartbeatHistory">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="averageBpm" ColumnName="averageBpm" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="heightHistories">
+      <EntityTypeMapping TypeName="diabidadbModel.heightHistory">
+        <MappingFragment StoreEntitySet="heightHistory">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="height" ColumnName="height" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="notifications">
+      <EntityTypeMapping TypeName="diabidadbModel.notification">
+        <MappingFragment StoreEntitySet="notification">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="patientAssignedId" ColumnName="patientAssignedId" />
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="userHighBpmId" ColumnName="userHighBpmId" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="notificationText" ColumnName="notificationText" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="specialistByPatients">
+      <EntityTypeMapping TypeName="diabidadbModel.specialistByPatient">
+        <MappingFragment StoreEntitySet="specialistByPatient">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="patientId" ColumnName="patientId" />
+          <ScalarProperty Name="specialistId" ColumnName="specialistId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="diabidadbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="diabidadbModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="userTypeId" ColumnName="userTypeId" />
+          <ScalarProperty Name="tokenFCM" ColumnName="tokenFCM" />
+          <ScalarProperty Name="pictureUrl" ColumnName="pictureUrl" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userTypes">
+      <EntityTypeMapping TypeName="diabidadbModel.userType">
+        <MappingFragment StoreEntitySet="userType">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="weightHistories">
+      <EntityTypeMapping TypeName="diabidadbModel.weightHistory">
+        <MappingFragment StoreEntitySet="weightHistory">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

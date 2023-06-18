@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="diabidadbEntities-Web.config Connection String" description="diabidadbEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Models.EF.Model1.csdl|res://*/Models.EF.Model1.ssdl|res://*/Models.EF.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=diabidadbserver.database.windows.net;initial catalog=diabidadb;persist security info=True;user id=diabidauser;password=WirWerdenWisen%;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\KARIQUE\\source\\repos\\diabidabackend\\diabidabackend\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='diabidadbEntities']/@connectionString" />
+  </parameter>
+</parameters>
